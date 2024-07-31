@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://4a4whlsfun7p"]
+
+[ext_resource type="Texture2D" uid="uid://cygv6va07a827" path="res://assets/player_idle-01.png" id="1_e0fhj"]
+[ext_resource type="Script" path="res://script/player.gd" id="1_uvct3"]
+[ext_resource type="Texture2D" uid="uid://pprymfll6xm8" path="res://assets/player_idle-02.png" id="2_tunti"]
+[ext_resource type="Texture2D" uid="uid://2hytw5mf332" path="res://assets/player_idle-03.png" id="3_d0olk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3bksw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e0fhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tunti")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d0olk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t2sfx"]
+radius = 24.0208
+
+[node name="player" type="Area2D"]
+script = ExtResource("1_uvct3")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_3bksw")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.261767
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_t2sfx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
